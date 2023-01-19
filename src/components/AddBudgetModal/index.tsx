@@ -1,3 +1,5 @@
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
 import {
   TextField,
   Button,
@@ -10,8 +12,8 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useBudgets } from "../../contexts/BudgetsContext";
+import { useState } from "react";
 
 type Props = {
   show: boolean;
@@ -25,6 +27,10 @@ interface IFormInputs {
 
 export default function AddBudgetModal({ show, handleClose }: Props) {
   const { addBudget } = useBudgets();
+  const [formState, setFormState] = useState<IFormInputs>({
+    nameField: "",
+    maxSpending: 0,
+  });
 
   const {
     handleSubmit,
@@ -77,9 +83,13 @@ export default function AddBudgetModal({ show, handleClose }: Props) {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  value={field.value}
+                  value={formState.nameField}
                   onChange={(e) => {
                     field.onChange(e);
+                    setFormState((prevState) => ({
+                      ...prevState,
+                      nameField: e.target.value,
+                    }));
                   }}
                   size="medium"
                   fullWidth
@@ -93,12 +103,25 @@ export default function AddBudgetModal({ show, handleClose }: Props) {
             <Controller
               control={control}
               name="maxSpending"
+              rules={{
+                required: "Required",
+                validate: (value) => {
+                  if (value < 1) {
+                    return "Minimum 1 ₴";
+                  }
+                  return true;
+                },
+              }}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  value={field.value}
+                  value={formState.maxSpending}
                   onChange={(e) => {
                     field.onChange(e);
+                    setFormState((prevState) => ({
+                      ...prevState,
+                      maxSpending: Number.parseFloat(e.target.value),
+                    }));
                   }}
                   size="medium"
                   fullWidth

@@ -7,7 +7,7 @@ type Props = {
 
 export default function Header({ openAddBudgetModal, openAddExpenceModal }: Props): JSX.Element {
   return (
-    <Stack direction="row" marginTop={2}>
+    <Stack direction="row">
       <Typography
         variant="h2"
         component="h1"

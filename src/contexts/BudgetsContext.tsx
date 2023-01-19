@@ -20,23 +20,23 @@ export function useBudgets() {
 
 export const BudgetsProvider: FC<BudgetContextProps> = ({ children }) => {
   const [budgets, setBudgets] = useLocalStorage<IBudget[]>("budgets", [
-    { id: uuidV4(), name: "Eat", max: 1200 },
+    // { id: uuidV4(), name: "Eat", max: 1200 },
   ]);
   const [expenses, setExpenses] = useLocalStorage<IExpenses[]>("expenses", []);
 
   const getBudgetExpenses = (budgetId: string): IExpenses[] => {
     return expenses.filter((expense) => expense.budgetId === budgetId);
   };
-  const addExpense = ({ description, amount, budgetId }: AddExpenseProps) => {
+  const addExpense = ({ description, amount, budgetId, date }: AddExpenseProps) => {
     setExpenses((prevExpenses) => {
       return [
         ...prevExpenses,
         {
           amount,
           budgetId,
-          date: Date.now(),
           description,
           id: uuidV4(),
+          date,
         },
       ];
     });

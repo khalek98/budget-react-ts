@@ -16,7 +16,7 @@ export default function UncategorizedBudgetCard({
     0,
   );
 
-  if (amount === 0) return null;
+  // if (amount === 0) return null;
 
   return (
     <BudgetCard

@@ -18,7 +18,7 @@ export type BudgetContextType = {
   budgets: IBudget[];
   expenses: IExpenses[];
   getBudgetExpenses: (budgetId: budgetId) => IExpenses[];
-  addExpense: ({ description, amount, budgetId }: AddExpemdeProps) => void;
+  addExpense: ({ description, amount, budgetId }: AddExpenseProps) => void;
   addBudget: ({ name, max }: AddBudgetProps) => void;
   deleteBudget: (id: string) => void;
   deleteExpense: (id: string) => void;

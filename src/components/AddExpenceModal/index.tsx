@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
 import {
   TextField,
   Button,
@@ -14,9 +17,6 @@ import {
   FormControl,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
-import { Dispatch, SetStateAction, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../../contexts/BudgetsContext";
 import { budgetId } from "../../@types/budgets";
@@ -62,6 +62,7 @@ export default function AddExpenceModal({
       description: data.description,
       amount: data.amount,
       budgetId: defaultBudgetId,
+      date: Date.now(),
     });
 
     reset();

@@ -57,34 +57,55 @@ export default function BudgetCard({
           </Typography>
           <Typography fontSize={(!max && 24) || 20} variant="h6" component="div">
             {amount} ₴{" "}
-            {max && (
+            {max && max > 0 ? (
               <Typography variant="body1" component="span" color="grey">
                 / {max} ₴
               </Typography>
-            )}
+            ) : null}
           </Typography>
         </Stack>
-        {max && (
+        {max && max > 0 ? (
           <LinearProgress
             variant="determinate"
             color={getProgressBarColor(ratio)}
             value={ratio > 100 ? 100 : ratio}
             sx={{ height: "30px", borderRadius: "20px", bgcolor: "rgba(0,0,0,.1)" }}
           />
-        )}
+        ) : null}
       </CardContent>
       {!hideButtons && (
         <CardActions sx={{ justifyContent: "end" }}>
-          <Button variant="outlined" onClick={onAddExpenseClick}>
-            Add Expence
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={onViewExpensesClick}
-            sx={{ filter: "grayscale(100%)" }}
+          <Stack
+            direction={"row"}
+            gap={1}
+            sx={{
+              flexDirection: "row",
+              "@media (max-width: 375px)": {
+                flexDirection: "column",
+                width: "100%",
+              },
+            }}
           >
-            View Expences
-          </Button>
+            <Button
+              sx={{
+                width: "none",
+                "@media (max-width: 375px)": {
+                  width: "100%",
+                },
+              }}
+              variant="outlined"
+              onClick={onAddExpenseClick}
+            >
+              Add Expence
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={onViewExpensesClick}
+              sx={{ filter: "grayscale(100%)" }}
+            >
+              View Expences
+            </Button>
+          </Stack>
         </CardActions>
       )}
     </Card>
