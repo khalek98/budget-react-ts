@@ -11,5 +11,5 @@ export default function TotalBudgetCard() {
 
   // if (max === 0) return null;
 
-  return <BudgetCard amount={total} grey name="Total" max={max} hideButtons />;
+  return <BudgetCard amount={+total.toFixed(2)} grey name="Total" max={max} hideButtons />;
 }

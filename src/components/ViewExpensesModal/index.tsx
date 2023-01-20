@@ -1,5 +1,12 @@
+import { Fragment } from "react";
+import { format } from "date-fns";
+import { Link as RouterLink } from "react-router-dom";
+
 import {
   Button,
+  Card,
+  CardActionArea,
+  CardActions,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -10,11 +17,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { format } from "date-fns";
 
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../../contexts/BudgetsContext";
 import { budgetId, IBudget } from "../../@types/budgets";
-import { Fragment } from "react";
 
 type Props = {
   budgetId: budgetId;
@@ -76,7 +81,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }: Props) {
       </IconButton>
 
       <DialogContent>
-        <Stack direction="column" spacing={3}>
+        <Stack direction="column" spacing={2}>
           {expenses.length < 1 ? (
             <Typography
               sx={{
@@ -91,22 +96,34 @@ export default function ViewExpensesModal({ budgetId, handleClose }: Props) {
           ) : (
             expenses.map((expense, i) => (
               <Fragment key={expense.id}>
-                <Stack direction="row" gap={2} key={expense.id}>
-                  <Typography
-                    variant="h6"
-                    sx={{ display: "inline-flex", mr: "auto", alignItems: "center" }}
+                <Card sx={{ display: "flex" }}>
+                  <CardActionArea
+                    component={RouterLink}
+                    to={`expense/${expense.date}`}
+                    sx={{ padding: "12px 8px" }}
                   >
-                    {expense.description}
-                  </Typography>
-                  <Stack direction="column" gap={0} alignItems="end" justifyContent={"center"}>
-                    <Typography variant="h6">{+expense.amount} ₴</Typography>
-                    <Typography variant="caption">{format(expense.date, "dd/MM/yyyy")}</Typography>
-                  </Stack>
-                  <Button onClick={() => deleteExpense(expense.id)} sx={{ minWidth: "30px" }}>
-                    <HighlightOffIcon sx={{ color: "red" }} />
-                  </Button>
-                </Stack>
-                {i + 1 !== expenses.length && <Divider />}
+                    <Stack direction="row" gap={2}>
+                      <Typography
+                        variant="h6"
+                        sx={{ display: "inline-flex", mr: "auto", alignItems: "center" }}
+                      >
+                        {expense.description}
+                      </Typography>
+                      <Stack direction="column" gap={0} alignItems="end" justifyContent={"center"}>
+                        <Typography variant="h6">{+expense.amount} ₴</Typography>
+                        <Typography variant="caption">
+                          {format(expense.date, "dd/MM/yyyy")}
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button onClick={() => deleteExpense(expense.id)} sx={{ minWidth: "30px" }}>
+                      <HighlightOffIcon sx={{ color: "red" }} />
+                    </Button>
+                  </CardActions>
+                </Card>
+                {/* {i + 1 !== expenses.length && <Divider />} */}
               </Fragment>
             ))
           )}

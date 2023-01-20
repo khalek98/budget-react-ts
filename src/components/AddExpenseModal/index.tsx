@@ -29,12 +29,12 @@ type Props = {
   setAddExpenseModalBudgetId: Dispatch<SetStateAction<budgetId>>;
 };
 
-interface IFormInputs {
+export interface IFormExpenceInputs {
   description: string;
   amount: string;
 }
 
-export default function AddExpenceModal({
+export default function AddExpenseModal({
   show,
   handleClose,
   defaultBudgetId,
@@ -46,18 +46,18 @@ export default function AddExpenceModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<IFormExpenceInputs>({
     mode: "onSubmit",
     reValidateMode: "onChange",
     criteriaMode: "all",
   });
 
-  const [inputStates, setInputStates] = useState<IFormInputs>({
+  const [inputStates, setInputStates] = useState<IFormExpenceInputs>({
     description: "",
     amount: "",
   });
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<IFormExpenceInputs> = (data) => {
     addExpense({
       description: data.description,
       amount: data.amount,
@@ -127,6 +127,7 @@ export default function AddExpenceModal({
               render={({ field }) => (
                 <TextField
                   {...field}
+                  id="outlined-number"
                   value={inputStates.amount}
                   onChange={(e) => {
                     const value = removeLeadingZeros(e.target.value);
@@ -140,8 +141,9 @@ export default function AddExpenceModal({
                   fullWidth
                   label="Amount"
                   type="number"
+                  // InputLabelProps={{ shrink: true }}
                   InputProps={{
-                    inputProps: { pattern: "[0-9*]", inputMode: "numeric", step: "0.01" },
+                    inputProps: { inputMode: "numeric", step: "0.01" },
                   }}
                   error={!!errors.amount?.message}
                   helperText={errors?.amount?.message}

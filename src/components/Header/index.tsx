@@ -2,10 +2,10 @@ import { Button, Stack, Typography } from "@mui/material";
 
 type Props = {
   openAddBudgetModal: () => void;
-  openAddExpenceModal: () => void;
+  openAddExpenseModal: () => void;
 };
 
-export default function Header({ openAddBudgetModal, openAddExpenceModal }: Props): JSX.Element {
+export default function Header({ openAddBudgetModal, openAddExpenseModal }: Props): JSX.Element {
   return (
     <Stack direction="row">
       <Typography
@@ -19,8 +19,8 @@ export default function Header({ openAddBudgetModal, openAddExpenceModal }: Prop
         <Button onClick={openAddBudgetModal} variant="contained">
           Add Budget
         </Button>
-        <Button onClick={() => openAddExpenceModal()} variant="outlined">
-          Add Expence
+        <Button onClick={() => openAddExpenseModal()} variant="outlined">
+          Add Expense
         </Button>
       </Stack>
     </Stack>

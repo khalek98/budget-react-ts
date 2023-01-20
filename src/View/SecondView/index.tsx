@@ -11,11 +11,11 @@ const SecondView = ({ text }: Props) => {
     <>
       <Container maxWidth="md" fixed sx={{ paddingTop: 2 }}>
         <Stack direction={"row"} justifyContent="space-between">
-          <Typography component={"h1"} variant="h3">
+          <Typography component={"h1"} variant="h4">
             {text}
           </Typography>
           <Button
-            sx={{ maxHeight: "50px", width: "100px" }}
+            sx={{ maxHeight: "50px", width: "110px" }}
             variant="contained"
             component={RouterLink}
             to="/"

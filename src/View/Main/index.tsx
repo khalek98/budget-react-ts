@@ -7,7 +7,7 @@ import {
   BudgetCard,
   AddBudgetModal,
   UncategorizedBudgetCard,
-  AddExpenceModal,
+  AddExpenseModal,
   TotalBudgetCard,
   ViewExpensesModal,
 } from "../../components";
@@ -32,7 +32,7 @@ const Main: FC = () => {
       <Container maxWidth="md" fixed sx={{ pt: 2, pb: 2 }}>
         <Header
           openAddBudgetModal={() => setShowAddBudgetModal(true)}
-          openAddExpenceModal={() => openAddExpenseModal(UNCATEGORIZED_BUDGET_ID)}
+          openAddExpenseModal={() => openAddExpenseModal(UNCATEGORIZED_BUDGET_ID)}
         />
         {budgets.map(({ name, max, id }) => {
           const amount = getBudgetExpenses(id).reduce((prev, cur) => prev + +cur.amount, 0);
@@ -62,7 +62,7 @@ const Main: FC = () => {
         </Button>
       </Container>
       <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)} />
-      <AddExpenceModal
+      <AddExpenseModal
         show={showAddExpenseModal}
         handleClose={() => setShowAddExpenseModal(false)}
         defaultBudgetId={addExpenseModalBudgetId}

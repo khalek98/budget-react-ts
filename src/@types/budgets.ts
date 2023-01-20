@@ -14,6 +14,13 @@ export type AddExpenseProps = {
   date: number;
 };
 
+export type EditExpenseProps = {
+  description?: string;
+  amount?: string;
+  budgetId?: budgetId;
+  date?: number;
+};
+
 export type BudgetContextType = {
   budgets: IBudget[];
   expenses: IExpenses[];
@@ -22,6 +29,7 @@ export type BudgetContextType = {
   addBudget: ({ name, max }: AddBudgetProps) => void;
   deleteBudget: (id: string) => void;
   deleteExpense: (id: string) => void;
+  editExpense: (id: string, { ...props }: EditExpenseProps) => void;
 };
 
 export interface IExpenses {

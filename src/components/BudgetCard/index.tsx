@@ -96,14 +96,14 @@ export default function BudgetCard({
               variant="outlined"
               onClick={onAddExpenseClick}
             >
-              Add Expence
+              Add Expense
             </Button>
             <Button
               variant="outlined"
               onClick={onViewExpensesClick}
               sx={{ filter: "grayscale(100%)" }}
             >
-              View Expences
+              View Expenses
             </Button>
           </Stack>
         </CardActions>

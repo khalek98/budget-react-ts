@@ -5,6 +5,7 @@ import {
   AddExpenseProps,
   BudgetContextProps,
   BudgetContextType,
+  EditExpenseProps,
   IBudget,
   IExpenses,
 } from "../@types/budgets";
@@ -59,6 +60,16 @@ export const BudgetsProvider: FC<BudgetContextProps> = ({ children }) => {
       return prevExpenses.filter((expense) => expense.id !== id);
     });
   };
+  const editExpense = (id: string, { ...props }: EditExpenseProps) => {
+    setExpenses(
+      expenses.map((expense) => {
+        if (expense.id === id) {
+          return { ...expense, ...props };
+        }
+        return expense;
+      }),
+    );
+  };
 
   return (
     <BudgetsContext.Provider
@@ -70,6 +81,7 @@ export const BudgetsProvider: FC<BudgetContextProps> = ({ children }) => {
         addBudget,
         deleteBudget,
         deleteExpense,
+        editExpense,
       }}
     >
       {children}

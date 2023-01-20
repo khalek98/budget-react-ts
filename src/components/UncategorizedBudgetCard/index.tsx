@@ -20,7 +20,7 @@ export default function UncategorizedBudgetCard({
 
   return (
     <BudgetCard
-      amount={amount}
+      amount={+amount.toFixed(2)}
       grey
       name="Uncategorized"
       onAddExpenseClick={onAddExpenseClick}
