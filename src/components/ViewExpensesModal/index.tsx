@@ -10,7 +10,6 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Divider,
   IconButton,
   Stack,
   Typography,
@@ -50,7 +49,7 @@ export default function ViewExpensesModal({ budgetId, handleClose }: Props) {
             }}
             component="h3"
           >
-            Expenses - {budget && budget.name}
+            {budget && budget.name}
           </Typography>
           {budgetId !== UNCATEGORIZED_BUDGET_ID && (
             <Button
@@ -123,7 +122,6 @@ export default function ViewExpensesModal({ budgetId, handleClose }: Props) {
                     </Button>
                   </CardActions>
                 </Card>
-                {/* {i + 1 !== expenses.length && <Divider />} */}
               </Fragment>
             ))
           )}

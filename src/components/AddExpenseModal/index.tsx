@@ -141,7 +141,6 @@ export default function AddExpenseModal({
                   fullWidth
                   label="Amount"
                   type="number"
-                  // InputLabelProps={{ shrink: true }}
                   InputProps={{
                     inputProps: { inputMode: "numeric", step: "0.01" },
                   }}

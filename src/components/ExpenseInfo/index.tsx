@@ -9,11 +9,13 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Snackbar,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { FC, forwardRef, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { EditExpenseProps } from "../../@types/budgets";
@@ -26,6 +28,10 @@ interface IFormInputs {
   amount: string;
   budgetId: string;
 }
+
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ExpenseInfo: FC<Props> = ({}) => {
   const { id } = useParams();
@@ -60,6 +66,18 @@ const ExpenseInfo: FC<Props> = ({}) => {
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     if (!expense) return;
     editExpense(expense.id, { ...inputStates });
+  };
+
+  // Snackbar
+
+  const [snackbarState, setSnackbarState] = useState(false);
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbarState(false);
   };
 
   return (
@@ -171,11 +189,19 @@ const ExpenseInfo: FC<Props> = ({}) => {
               </Stack>
             </CardContent>
             <CardActions>
-              <Button type="submit">Save</Button>
+              <Button type="submit" onClick={() => setSnackbarState(true)}>
+                Save
+              </Button>
             </CardActions>
           </form>
         </Card>
       </Container>
+
+      <Snackbar open={snackbarState} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Expence information edited!
+        </Alert>
+      </Snackbar>
     </>
   );
 };
